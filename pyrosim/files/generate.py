@@ -1,8 +1,7 @@
 import sys
-sys.path.insert(0, '../pyrosim')
+sys.path.insert(0, "../pyrosim/pyrosim")
 import pyrosim
 
-sim = pyrosim.Simulator(play_paused=True, eval_time=1000)
-
-sim.start()
-sim.wait_to_finish()
+pyrosim.Start_SDF("box.sdf")
+pyrosim.Send_Cube(name="Box", pos=[0,0,0.5] , size=[1,1,1])
+pyrosim.End()

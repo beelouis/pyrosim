@@ -4,6 +4,8 @@ import pyrosim # noqa
 
 NUM_SIMS = 5
 sims = [0] * NUM_SIMS
+print(sims)
+
 for s in range(NUM_SIMS):
     sims[s] = pyrosim.Simulator(play_paused=True)
     sims[s].send_cylinder(x=0, y=0, z=0.1, r1=0, r2=1,
