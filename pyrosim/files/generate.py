@@ -16,17 +16,17 @@ def Create_Robot():
     bodyL, bodyW, bodyH = (1, 1, 1)
     bodyX, bodyY, bodyZ = (0, 0, bodyH/2)
 
-    # right shoulder joint position (absolute)
-    rsjX, rsjY, rsjZ = (bodyL/2, 0, bodyH)
     # right shoulder position and size (relative to joint^)
     rsL, rsW, rsH = (0.1, 0.1, 0.1)
     rsX, rsY, rsZ = (rsL/2, 0, 0)
+    # right shoulder joint position (absolute)
+    rsjX, rsjY, rsjZ = (bodyL/2, 0, bodyH-rsH/2)
 
-    # left shoulder joint position (absolute)
-    lsjX, lsjY, lsjZ = (-bodyL/2, 0, bodyH)
     # left shoulder position and size (relative to joint^)
     lsL, lsW, lsH = (0.1, 0.1, 0.1)
     lsX, lsY, lsZ = (-lsL/2, 0, 0)
+    # left shoulder joint position (absolute)
+    lsjX, lsjY, lsjZ = (-bodyL/2, 0, bodyH-lsH/2)
 
     # both arms are the same size
     armL, armW, armH = (1, 0.25, 0.25)
@@ -54,7 +54,8 @@ def Create_Robot():
         parent= "Torso" ,
         child = "RightShoulder" ,
         type = "revolute",
-        position = [rsjX, rsjY, rsjZ] # abs
+        position = [rsjX, rsjY, rsjZ], # abs
+        axis = "0 1 0"
     )
 
     pyrosim.Send_Cube(name=(f"RightShoulder"),
@@ -81,7 +82,8 @@ def Create_Robot():
         parent= "Torso" ,
         child = "LeftShoulder" ,
         type = "revolute",
-        position = [lsjX, lsjY, lsjZ]
+        position = [lsjX, lsjY, lsjZ],
+        axis = "0 1 0"
     )
 
     pyrosim.Send_Cube(name=(f"LeftShoulder"),

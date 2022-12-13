@@ -24,7 +24,7 @@
     <joint name="Torso_RightShoulder" type="revolute">
        <parent link="Torso"/>
        <child  link="RightShoulder"/>
-       <origin rpy="0 0 0" xyz="0.5 0 1" />
+       <origin rpy="0 0 0" xyz="0.5 0 0.95" />
        <axis xyz= "0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
@@ -82,7 +82,7 @@
     <joint name="Torso_LeftShoulder" type="revolute">
        <parent link="Torso"/>
        <child  link="LeftShoulder"/>
-       <origin rpy="0 0 0" xyz="-0.5 0 1" />
+       <origin rpy="0 0 0" xyz="-0.5 0 0.95" />
        <axis xyz= "0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
