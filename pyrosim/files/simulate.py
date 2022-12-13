@@ -15,10 +15,10 @@ robotID = p.loadURDF("body.urdf")
 
 p.loadSDF("world.sdf")
 
-for i in range(1000):
+for i in range(3000):
     p.stepSimulation()
-    print(i)
     time.sleep(1/60)
+    print(i)
 
 
 p.disconnect()
