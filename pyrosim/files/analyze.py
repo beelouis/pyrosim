@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-backData = np.load("data/backLegSensorValues.npy")
-frontData = np.load("data/frontLegSensorValues.npy")
+backData = np.load("backLegSensorValues.npy")
+frontData = np.load("frontLegSensorValues.npy")
 
 plt.plot(backData, linewidth = 3)
 plt.plot(frontData, linewidth = 1)
