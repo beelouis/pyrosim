@@ -3,8 +3,9 @@ import time
 sys.path.insert(0, '..')
 import pybullet as p
 import pybullet_data
-sys.path.insert(0, "pyrosim/pyrosim")
+sys.path.insert(0, "../pyrosim/pyrosim")
 import pyrosim
+import numpy as np
 
 # client handles physics and draws to GUI
 physicsClient = p.connect(p.GUI)
