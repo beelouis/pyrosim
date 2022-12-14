@@ -7,6 +7,7 @@ sys.path.insert(0, "../pyrosim/pyrosim")
 import pyrosim
 import numpy as np
 import math
+import random
 
 # client handles physics and draws to GUI
 physicsClient = p.connect(p.GUI)
@@ -19,7 +20,7 @@ robotID = p.loadURDF("body.urdf")
 
 p.loadSDF("world.sdf")
 
-numSteps = 5_00
+numSteps = 1000
 
 pyrosim.Prepare_To_Simulate(robotID)
 backLegSensorValues = np.zeros(numSteps)
@@ -31,21 +32,22 @@ for i in range(numSteps):
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
 
-    pyrosim.Set_Motor_For_Joint(
-        bodyIndex = robotID, # change to robot if this doesnt work
-        jointName = b"Torso_BackLeg", # change to b"Torso_BackLeg"
-        controlMode = p.POSITION_CONTROL,
-        targetPosition = math.pi/4.0,
-        maxForce = 500
-    )
+    if i % 20 == 0:
+        pyrosim.Set_Motor_For_Joint(
+            bodyIndex = robotID, # change to robot if this doesnt work
+            jointName = b"Torso_BackLeg", # change to b"Torso_BackLeg"
+            controlMode = p.POSITION_CONTROL,
+            targetPosition = (random.random() * math.pi/2) - math.pi/4,
+            maxForce = 20
+        )
 
-    pyrosim.Set_Motor_For_Joint(
-        bodyIndex = robotID, # change to robot if this doesnt work
-        jointName = b"Torso_FrontLeg", # change to b"Torso_BackLeg"
-        controlMode = p.POSITION_CONTROL,
-        targetPosition = -math.pi/4.0,
-        maxForce = 500
-    )
+        pyrosim.Set_Motor_For_Joint(
+            bodyIndex = robotID, # change to robot if this doesnt work
+            jointName = b"Torso_FrontLeg", # change to b"Torso_BackLeg"
+            controlMode = p.POSITION_CONTROL,
+            targetPosition = (random.random() * math.pi/2) - math.pi/4,
+            maxForce = 20
+        )
 
     print(i)
     time.sleep(1/60)
