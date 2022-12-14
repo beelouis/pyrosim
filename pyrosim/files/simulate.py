@@ -6,7 +6,6 @@ import pybullet_data
 sys.path.insert(0, "../pyrosim/pyrosim")
 import pyrosim
 import numpy as np
-import math
 import random
 
 # client handles physics and draws to GUI
@@ -20,37 +19,64 @@ robotID = p.loadURDF("body.urdf")
 
 p.loadSDF("world.sdf")
 
-numSteps = 1000
+numSteps = 1_000
 
 pyrosim.Prepare_To_Simulate(robotID)
+
+amplitudeBack = np.pi/4
+frequencyBack = 20
+phaseOffsetBack = 0
+
 backLegSensorValues = np.zeros(numSteps)
 frontLegSensorValues = np.zeros(numSteps)
 
+backLegMotorInput = amplitudeBack * np.sin(np.linspace(
+    -np.pi * frequencyBack + phaseOffsetBack,
+    np.pi * frequencyBack + phaseOffsetBack,
+    numSteps
+    )
+)
+
+amplitudeFront = np.pi/4
+frequencyFront = 10
+phaseOffsetFront = np.pi/2
+
+frontLegMotorInput = amplitudeFront * np.sin(np.linspace(
+    -np.pi * frequencyFront + phaseOffsetFront,
+    np.pi * frequencyFront + phaseOffsetFront,
+    numSteps
+    )
+)
+
+# np.save("backMotor.npy", backLegMotorInput)
+# np.save("frontMotor.npy", frontLegMotorInput)
+# exit()
 
 for i in range(numSteps):
     p.stepSimulation()
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
 
-    if i % 20 == 0:
+    if i % 1 == 0:
         pyrosim.Set_Motor_For_Joint(
             bodyIndex = robotID, # change to robot if this doesnt work
             jointName = b"Torso_BackLeg", # change to b"Torso_BackLeg"
             controlMode = p.POSITION_CONTROL,
-            targetPosition = (random.random() * math.pi/2) - math.pi/4,
+            targetPosition = backLegMotorInput[i],
             maxForce = 20
         )
 
+    if i % 1 == 0:
         pyrosim.Set_Motor_For_Joint(
             bodyIndex = robotID, # change to robot if this doesnt work
             jointName = b"Torso_FrontLeg", # change to b"Torso_BackLeg"
             controlMode = p.POSITION_CONTROL,
-            targetPosition = (random.random() * math.pi/2) - math.pi/4,
+            targetPosition = frontLegMotorInput[i],
             maxForce = 20
         )
 
     print(i)
-    time.sleep(1/60)
+    time.sleep(1/100)
 
 np.save("frontLegSensorValues.npy", frontLegSensorValues)
 np.save("backLegSensorValues.npy", backLegSensorValues)
