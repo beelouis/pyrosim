@@ -69,7 +69,7 @@ def Create_Robot():
         child = "RightArm" ,
         type = "revolute",
         position = [rajX, rajY, rajZ],
-        axis = "0 0 1"
+        axis = "0 1 0"
     )
 
     pyrosim.Send_Cube(name=(f"RightArm"),
@@ -97,7 +97,7 @@ def Create_Robot():
         child = "LeftArm" ,
         type = "revolute",
         position = [lajX, lajY, lajZ],
-        axis = "0 0 1"
+        axis = "0 1 0"
     )
 
     pyrosim.Send_Cube(name=(f"LeftArm"),
