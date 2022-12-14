@@ -31,7 +31,7 @@ for i in range(numSteps):
     time.sleep(1/60)
     print(i)
 
-np.save("rightArmSensorValues.npy", frontLegSensorValues)
-np.save("leftArmSensorValues.npy", backLegSensorValues)
+np.save("rightArmSensorValues.npy", rightArmSensorValues)
+np.save("leftArmSensorValues.npy", leftArmSensorValues)
 
 p.disconnect()
