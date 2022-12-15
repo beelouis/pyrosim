@@ -3,7 +3,7 @@ import time
 sys.path.insert(0, '..')
 import pybullet as p
 import pybullet_data
-sys.path.insert(0, "../pyrosim/pyrosim")
+sys.path.insert(0, "../pyrosim")
 import pyrosim
 import numpy as np
 import random
@@ -48,9 +48,6 @@ frontLegMotorInput = amplitudeFront * np.sin(np.linspace(
     )
 )
 
-# np.save("backMotor.npy", backLegMotorInput)
-# np.save("frontMotor.npy", frontLegMotorInput)
-# exit()
 
 for i in range(numSteps):
     p.stepSimulation()

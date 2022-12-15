@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "../pyrosim/pyrosim")
+sys.path.insert(0, "../pyrosim")
 import pyrosim
 
 def Create_World():
