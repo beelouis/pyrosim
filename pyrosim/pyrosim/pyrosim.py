@@ -55,11 +55,15 @@ class Simulator(object):
     window_size  : tuple or list of 2 ints, optional
             The initial window size for the visualization. Irrelevant if
             blind=True. Default is (750, 500)
+
+
     xyz         : list of 3 floats
             The xyz position of the camera (default is [0.8317,-0.9817,0.8000])
     hpr         : float, optional
             The heading, pitch, and roll of the camera
             (default is [121,-27.5,0.0])
+            
+
     use_textures : bool, optional
             Draw default ODE textures or not during simulation.
             (default is False)
@@ -74,14 +78,14 @@ class Simulator(object):
     WORLD = -1
     FOREVER = -1
 
-    def __init__(self, play_blind=False, play_paused=False,
-                 eval_time=evaluation_time, dt=dt,
-                 gravity=gravity,
-                 window_size=WINDOW_SIZE,
-                 xyz=xyz, hpr=hpr, use_textures=False,
-                 debug=False, capture=0):
-        assert play_blind is False or eval_time > 0, ('Cannot run'
-                                                      ' blind forever')
+    def __init__(self, play_blind=False,        play_paused=False,
+                 eval_time=evaluation_time,     dt=dt,
+                 gravity=gravity,               window_size=WINDOW_SIZE,
+                 xyz=xyz,                       hpr=hpr,
+                 use_textures=False,            debug=False, capture=0
+                ):
+
+        assert play_blind is False or eval_time > 0, ('Cannot run blind forever')
         assert eval_time > 0, ('Cannot run forever: FIXXX MEEE')
 
         self.strings_to_send = []
@@ -136,6 +140,7 @@ class Simulator(object):
             self._send('Debug', 1)
         else:
             self._send('Debug', 0)
+
         self.send_camera(xyz, hpr)
 
 # ------Collisions-------------------------
