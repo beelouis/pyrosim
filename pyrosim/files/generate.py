@@ -3,12 +3,13 @@ sys.path.insert(0, "../pyrosim")
 import pyrosim
 
 def Create_World():
-    pyrosim.Start_SDF("world.sdf")
+    pyrosim.Start_SDF("df/world.sdf")
     pyrosim.Send_Cube(name=(f"TheWorldCube"), pos = (0, 5, 0.5), size = (1, 1, 1))
     pyrosim.End()
 
-def Create_Robot():
-    pyrosim.Start_URDF("body.urdf")
+
+def generateBody():
+    pyrosim.Start_URDF("df/body.urdf")
     l, w, h = (1, 1, 1)
 
     pyrosim.Send_Cube(name=(f"Torso"),
@@ -49,10 +50,14 @@ def Create_Robot():
         size = (l, w, h)
     )
 
+    pyrosim.End()
 
-
+def generateBrain():
+    pyrosim.Start_NeuralNetwork("df/brain.nndf")
+    pyrosim.Send_Sensor_Neuron(name = 0, linkName = "Torso")
     pyrosim.End()
 
 
 Create_World()
-Create_Robot()
+generateBody()
+generateBrain()

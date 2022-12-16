@@ -18,10 +18,10 @@ class Simulation:
         self.physicsClient = p.connect(p.GUI)
         # client handles physics and draws to GUI
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        self.robotID = p.loadURDF("body.urdf")
+        self.robotID = p.loadURDF("df/body.urdf")
         self.planeID = p.loadURDF("plane.urdf")
         #plane comes with pybullet
-        p.loadSDF("world.sdf")
+        p.loadSDF("df/world.sdf")
         p.setGravity(0, 0, -9.8)
         pyrosim.Prepare_To_Simulate(self.robotID)
         self.robot = Robot(self.robotID)
@@ -31,6 +31,7 @@ class Simulation:
             p.stepSimulation()
             time.sleep(c.slp)
             self.robot.sense(t)
+            self.robot.think()
             self.robot.act(t)
 
     def saveSensorValues(self):

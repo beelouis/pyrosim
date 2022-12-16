@@ -4,7 +4,7 @@ import pybullet
 
 import pyrosim as pyrosim
 
-import constants as c
+import constants as const
 
 class NEURON:
 
@@ -42,15 +42,15 @@ class NEURON:
 
     def Is_Sensor_Neuron(self):
 
-        return self.type == c.SENSOR_NEURON
+        return self.type == const.SENSOR_NEURON
 
     def Is_Hidden_Neuron(self):
 
-        return self.type == c.HIDDEN_NEURON
+        return self.type == const.HIDDEN_NEURON
 
     def Is_Motor_Neuron(self):
 
-        return self.type == c.MOTOR_NEURON
+        return self.type == const.MOTOR_NEURON
 
     def Print(self):
 
@@ -80,15 +80,15 @@ class NEURON:
 
         if "sensor" in line:
 
-            self.type = c.SENSOR_NEURON
+            self.type = const.SENSOR_NEURON
 
         elif "motor" in line:
 
-            self.type = c.MOTOR_NEURON
+            self.type = const.MOTOR_NEURON
 
         else:
 
-            self.type = c.HIDDEN_NEURON
+            self.type = const.HIDDEN_NEURON
 
     def Print_Name(self):
 
