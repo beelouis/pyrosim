@@ -32,13 +32,12 @@ class Robot:
         for i, jointName in enumerate(pyrosim.jointNamesToIndices):
             self.motors[jointName] = Motor(jointName, self.name, i)
 
-    def act(self, t):
+    def act(self):
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
-                
-                print(neuronName, jointName, desiredAngle)
 
-        for motor in self.motors.values():
-            motor.setValue(t)
+                for motor in self.motors.values():
+                    if str(motor.jointName)[2:-1] == jointName:
+                        motor.setValue(desiredAngle)

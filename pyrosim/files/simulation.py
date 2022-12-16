@@ -32,7 +32,7 @@ class Simulation:
             time.sleep(c.slp)
             self.robot.sense(t)
             self.robot.think()
-            self.robot.act(t)
+            self.robot.act()
 
     def saveSensorValues(self):
         for sensorName, sensorObj in self.robot.sensors.items():
