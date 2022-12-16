@@ -14,12 +14,16 @@ class Motor:
         self.prepareToAct(i)
 
     def prepareToAct(self, i):
-        if i % 2 == 0:  mod = 1/4
-        else:           mod = 1
+        if i % 2 == 0:
+            fmod = 1/4
+            pmod = np.pi/2
+        else:
+            fmod = 1
+            pmod = 0
 
         self.amplitude  = c.amplitude
-        self.frequency  = c.frequency * mod
-        self.offset     = c.phaseOffset
+        self.frequency  = c.frequency * fmod
+        self.offset     = c.phaseOffset + pmod
 
         self.inputValues =  self.amplitude * np.sin(np.linspace(
             -np.pi  * self.frequency + self.offset,
