@@ -25,7 +25,6 @@ class Robot:
 
     def think(self):
         self.nn.Update()
-        self.nn.Print()
 
     def prepareToAct(self):
         self.motors = dict()
