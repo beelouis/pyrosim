@@ -1,6 +1,9 @@
 import numpy as np
 
-numSteps = 1_000
+numSteps = 5_00
+# numSteps = 1_000
+
+numGenerations = 10
 
 pathAppend = "data"
 

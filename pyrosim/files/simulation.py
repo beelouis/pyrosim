@@ -15,10 +15,13 @@ class Simulation:
     def __init__(self):
         self.world = World()
 
-        self.physicsClient = p.connect(p.GUI)
-        # client handles physics and draws to GUI
+        # self.physicsClient = p.connect(p.GUI)
+        self.physicsClient = p.connect(p.DIRECT)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         self.robotID = p.loadURDF("df/body.urdf")
+
+        # p.changeVisualShape(self.robotID, 0, rgbaColor = [1.0, 0.6, 0.5])
+
         self.planeID = p.loadURDF("plane.urdf")
         #plane comes with pybullet
         p.loadSDF("df/world.sdf")
@@ -34,15 +37,16 @@ class Simulation:
             self.robot.think()
             self.robot.act()
 
+
+    def getFitness(self):
+        self.robot.getFitness()
+
     def saveSensorValues(self):
         for sensorName, sensorObj in self.robot.sensors.items():
             np.save(f"{c.pathAppend}/{str(sensorName)}.npy", sensorObj.sValues)
 
-    # def saveMotorValues(self):
-    #     for motorName, motorObj in self.robot.motors.items():
-    #         np.save(f"{c.pathAppend}/{str(motorName)[2:-1]}.npy", motorObj.inputValues)
-
     def __del__(self):
         print("bye bye !")
+        self.getFitness()
         self.saveSensorValues()
         p.disconnect()

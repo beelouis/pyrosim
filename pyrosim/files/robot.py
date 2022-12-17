@@ -3,13 +3,14 @@ from sensor import Sensor
 from motor import Motor
 import numpy as np
 import constants as c
+import pybullet as p
 sys.path.insert(0, "../pyrosim")
 import pyrosim
 from neuralNetwork import NEURAL_NETWORK as NN
 
 class Robot:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, id):
+        self.id = id
         self.nn = NN("df/brain.nndf")
         self.prepareToSense()
         self.prepareToAct()
@@ -29,7 +30,7 @@ class Robot:
     def prepareToAct(self):
         self.motors = dict()
         for i, jointName in enumerate(pyrosim.jointNamesToIndices):
-            self.motors[jointName] = Motor(jointName, self.name, i)
+            self.motors[jointName] = Motor(jointName, self.id, i)
 
     def act(self):
         for neuronName in self.nn.Get_Neuron_Names():
@@ -40,3 +41,11 @@ class Robot:
                 for motor in self.motors.values():
                     if str(motor.jointName)[2:-1] == jointName:
                         motor.setValue(desiredAngle)
+
+    def getFitness(self):
+        stateLink0 = p.getLinkState(self.id, 0)
+        posLink0 = stateLink0[0]
+        xLink0, yLink0, zLink0 = posLink0
+        # print(round(xLink0, 3), round(yLink0, 3), round(zLink0, 3))
+        with open("data/fitness.txt", "w") as fitness:
+            fitness.write(str(yLink0))
