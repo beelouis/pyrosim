@@ -38,12 +38,11 @@ class Simulation:
         for sensorName, sensorObj in self.robot.sensors.items():
             np.save(f"{c.pathAppend}/{str(sensorName)}.npy", sensorObj.sValues)
 
-    def saveMotorValues(self):
-        for motorName, motorObj in self.robot.motors.items():
-            np.save(f"{c.pathAppend}/{str(motorName)[2:-1]}.npy", motorObj.inputValues)
+    # def saveMotorValues(self):
+    #     for motorName, motorObj in self.robot.motors.items():
+    #         np.save(f"{c.pathAppend}/{str(motorName)[2:-1]}.npy", motorObj.inputValues)
 
     def __del__(self):
         print("bye bye !")
         self.saveSensorValues()
-        self.saveMotorValues()
         p.disconnect()

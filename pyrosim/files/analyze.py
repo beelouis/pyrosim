@@ -30,7 +30,7 @@ for file in os.listdir(dir):
             if not match_:
                 data[alias] = np.load(f"{pathAppend}/{filename}")
 
-
+plt.figure(figsize = (100, 100))
 for i, (dN, dV) in enumerate(data.items()):
     plt.plot(dV, linewidth = 4 - (i*2))
 
