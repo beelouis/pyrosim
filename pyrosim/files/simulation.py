@@ -15,8 +15,8 @@ class Simulation:
     def __init__(self):
         self.world = World()
 
-        # self.physicsClient = p.connect(p.GUI)
-        self.physicsClient = p.connect(p.DIRECT)
+        self.physicsClient = p.connect(p.GUI)
+        # self.physicsClient = p.connect(p.DIRECT)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         self.robotID = p.loadURDF("df/body.urdf")
 
