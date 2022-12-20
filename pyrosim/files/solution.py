@@ -13,7 +13,7 @@ class Solution:
         self.generateBrain()
         self.generateBody()
         self.generateBrain()
-        os.system("python sim.py")
+        os.system(f"python sim.py")
         with open("data/fitness.txt", "r") as fitness:
             self.fitness = float(fitness.read())
 
