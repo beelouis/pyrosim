@@ -12,11 +12,14 @@ sys.path.insert(0, "../pyrosim")
 import pyrosim
 
 class Simulation:
-    def __init__(self):
+    def __init__(self, arg):
         self.world = World()
+        self.arg = arg
 
-        self.physicsClient = p.connect(p.GUI)
-        self.physicsClient = p.connect(p.DIRECT)
+        if self.arg == "G":
+            self.physicsClient = p.connect(p.GUI)
+        elif self.arg == "D":
+            self.physicsClient = p.connect(p.DIRECT)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         self.robotID = p.loadURDF("df/body.urdf")
 
@@ -32,7 +35,10 @@ class Simulation:
     def run(self):
         for t in range(c.numSteps):
             p.stepSimulation()
-            time.sleep(c.slp)
+            if self.arg == "G":
+                time.sleep(c.slp * 100)
+            else:
+                time.sleep(c.slp)
             self.robot.sense(t)
             self.robot.think()
             self.robot.act()
@@ -46,7 +52,7 @@ class Simulation:
             np.save(f"{c.pathAppend}/{str(sensorName)}.npy", sensorObj.sValues)
 
     def __del__(self):
-        print("bye bye !")
+        print("\nbye bye !")
         self.getFitness()
         self.saveSensorValues()
         p.disconnect()

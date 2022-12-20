@@ -1,9 +1,9 @@
 import numpy as np
 
-numSteps = 5_00
-# numSteps = 1_000
+# numSteps = 5_00
+numSteps = 1_000
 
-numGenerations = 10
+numGenerations = 50
 
 pathAppend = "data"
 
@@ -11,7 +11,8 @@ amplitude = np.pi/4
 frequency = 20
 phaseOffset = 0
 
-slp = 1/100
+slp = 1/10000
+# slp = 1/100
 
 # motorMaxForce = 20
 

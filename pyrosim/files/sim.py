@@ -1,7 +1,10 @@
 from simulation import Simulation
 import sys
 
-# arg = sys.argv[1]
+try:
+    arg = sys.argv[1]
+except IndexError:
+    arg = "G"
 
-simulation = Simulation()
+simulation = Simulation(arg)
 simulation.run()

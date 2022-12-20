@@ -4,3 +4,4 @@ from solution import Solution
 
 hc = HillClimber()
 hc.evolve()
+hc.showBest()

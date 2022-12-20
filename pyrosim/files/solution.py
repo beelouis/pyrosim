@@ -9,11 +9,11 @@ class Solution:
     def __init__(self):
         self.weights = (np.random.rand(3,2) * 2) - 1
 
-    def evaluate(self):
+    def evaluate(self, arg):
         self.generateBrain()
         self.generateBody()
         self.generateBrain()
-        os.system(f"python sim.py")
+        os.system(f"python sim.py {arg}")
         with open("data/fitness.txt", "r") as fitness:
             self.fitness = float(fitness.read())
 

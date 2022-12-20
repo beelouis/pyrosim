@@ -7,17 +7,17 @@ class HillClimber:
         self.parent = Solution()
 
     def evolve(self):
-        self.parent.evaluate()
-        for currentGeneration in range(c.numGenerations):
-            self.evolveOnce()
+        self.parent.evaluate("G")
+        for i, currentGeneration in enumerate(range(c.numGenerations)):
+            self.evolveOnce(i)
 
-    def evolveOnce(self):
+    def evolveOnce(self, i):
         self.spawn()
         self.mutate()
-        self.child.evaluate()
+        self.child.evaluate("D")
         print(f"\n{self.parent.weights}")
         print(f"\n{self.child.weights}")
-
+        print(f"\n================= Generation: {i} =================\n")
         self.select()
 
     def spawn(self):
@@ -29,3 +29,6 @@ class HillClimber:
     def select(self):
         if self.child.fitness > self.parent.fitness:
             self.parent = self.child
+
+    def showBest(self):
+        self.parent.evaluate(arg = "G")
