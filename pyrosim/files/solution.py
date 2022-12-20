@@ -38,7 +38,6 @@ class Solution:
             pos = (0, w/2 + w, h/2 + h),
             size = (l, w, h)
         )
-
         pyrosim.Send_Joint(
             name = "Torso_BackLeg" ,
             parent= "Torso" ,
@@ -47,13 +46,11 @@ class Solution:
             position = [0, w, h],
             axis = "1 0 0"
         )
-
         pyrosim.Send_Cube(
             name=(f"BackLeg"),
             pos = (0, -w/2, -h/2),
             size = (l, w, h)
         )
-
         pyrosim.Send_Joint(
             name = "Torso_FrontLeg" ,
             parent= "Torso" ,
@@ -62,17 +59,16 @@ class Solution:
             position = [0, w/2 + w + w/2, h],
             axis = "1 0 0"
         )
-
         pyrosim.Send_Cube(
             name=(f"FrontLeg"),
             pos = (0, w/2, -h/2),
             size = (l, w, h)
         )
-
         pyrosim.End()
 
     def generateBrain(self):
         pyrosim.Start_NeuralNetwork("df/brain.nndf")
+        
         pyrosim.Send_Sensor_Neuron(name = 0, linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1, linkName = "BackLeg")
         pyrosim.Send_Sensor_Neuron(name = 2, linkName = "FrontLeg")
