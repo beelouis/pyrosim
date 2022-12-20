@@ -1,7 +1,7 @@
 import os
-from hillclimber import HillClimber
+from parallelHillClimber import ParallelHillClimber
 from solution import Solution
 
-hc = HillClimber()
-hc.evolve()
-hc.showBest()
+phc = ParallelHillClimber()
+phc.evolve()
+phc.showBest()

@@ -3,7 +3,8 @@ import numpy as np
 # numSteps = 5_00
 numSteps = 1_000
 
-numGenerations = 50
+numGenerations = 1
+populationSize = 2
 
 pathAppend = "data"
 
