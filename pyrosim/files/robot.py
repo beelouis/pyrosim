@@ -45,7 +45,6 @@ class Robot:
     def getFitness(self):
         stateLink0 = p.getLinkState(self.id, 0)
         posLink0 = stateLink0[0]
-        xLink0, yLink0, zLink0 = posLink0
-        # print(round(xLink0, 3), round(yLink0, 3), round(zLink0, 3))
+        yLink0 = posLink0[1]
         with open("data/fitness.txt", "w") as fitness:
             fitness.write(str(yLink0))

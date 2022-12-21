@@ -13,9 +13,9 @@ class Solution:
         self.generateBrain()
         self.generateBody()
         self.generateBrain()
-        os.system(f"python sim.py {arg} &")
-        while not os.path.exists("data/fitness.txt"):
-            time.sleep(0.01)
+        os.system(f"python sim.py {arg}")
+        # while not os.path.exists("data/fitness.txt"):
+        #     time.sleep(0.01)
         with open("data/fitness.txt", "r") as fitness:
             self.fitness = float(fitness.read())
 

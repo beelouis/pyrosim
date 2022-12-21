@@ -17,9 +17,11 @@ class Simulation:
         self.arg = arg
 
         if self.arg == "G":
-            self.physicsClient = p.connect(p.GUI)
+            con = p.GUI
         elif self.arg == "D":
-            self.physicsClient = p.connect(p.DIRECT)
+            con = p.DIRECT
+
+        self.physicsClient = p.connect(con)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         self.robotID = p.loadURDF("df/body.urdf")
 
@@ -43,7 +45,6 @@ class Simulation:
             self.robot.think()
             self.robot.act()
 
-
     def getFitness(self):
         self.robot.getFitness()
 
@@ -55,4 +56,6 @@ class Simulation:
         print("\nbye bye !")
         self.getFitness()
         self.saveSensorValues()
+        print("about to disconnect")
         p.disconnect()
+        print("disconnected")
