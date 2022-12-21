@@ -13,7 +13,9 @@ class Solution:
         self.generateBrain()
         self.generateBody()
         self.generateBrain()
-        os.system(f"python sim.py {arg}")
+        os.system(f"python sim.py {arg} &")
+        while not os.path.exists("data/fitness.txt"):
+            time.sleep(0.01)
         with open("data/fitness.txt", "r") as fitness:
             self.fitness = float(fitness.read())
 
@@ -68,7 +70,7 @@ class Solution:
 
     def generateBrain(self):
         pyrosim.Start_NeuralNetwork("df/brain.nndf")
-        
+
         pyrosim.Send_Sensor_Neuron(name = 0, linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1, linkName = "BackLeg")
         pyrosim.Send_Sensor_Neuron(name = 2, linkName = "FrontLeg")

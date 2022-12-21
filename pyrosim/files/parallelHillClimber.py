@@ -14,8 +14,8 @@ class ParallelHillClimber:
         for parentName, parent in self.parents.items():
             parent.evaluate("G")
             # step the simulatoin by creating a new child
-            for i, currentGeneration in enumerate(range(c.numGenerations)):
-                self.evolveOnce(parentName, parent, i)
+            # for i, currentGeneration in enumerate(range(c.numGenerations)):
+            #     self.evolveOnce(parentName, parent, i)
 
     def evolveOnce(self, parentName, parent, i):
         self.spawn(parent)
